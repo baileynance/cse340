@@ -64,12 +64,13 @@ Util.buildInventoryGrid = async function(data){
   let grid
   if(data){
     grid = `<div class="make-inventory">`
-    grid += `<p>${data.inv_description}</p>`
     grid += `<img src="${data.inv_image}" alt="${data.inv_year} ${data.inv_make} ${data.inv_model}">`
-    grid += `<img src="${data.inv_thumbnail}" alt="Thumbnail">`
-    grid += `<p>${data.inv_price}</p>`
-    grid += `<p>${data.inv_miles}<p>`
-    grid += `<p>${data.inv_color}<p>`
+    grid += `<p id="inv-description">${data.inv_description}</p>`
+    grid +=   `<div class="make-information">`
+    grid +=     `<p>Price: ${data.inv_price}</p>`
+    grid +=     `<p>Miles: ${data.inv_miles}<p>`
+    grid +=     `<p>Color: ${data.inv_color}<p>`
+    grid +=   `</div>`
     grid += `</div>`
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
