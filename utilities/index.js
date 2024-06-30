@@ -60,15 +60,22 @@ Util.buildClassificationGrid = async function(data){
 /* **************************************
 * Build the inventory id view HTML
 * ************************************ */
-// Util.buildInventoryGrid = async function(data){
-//   let grid
-//   if(data){
-//     grid = `<p>${data.inv_description}</p>`
-//   } else {
-//     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
-//   }
-//   return grid
-// }
+Util.buildInventoryGrid = async function(data){
+  let grid
+  if(data){
+    grid = `<div class="make-inventory">`
+    grid += `<p>${data.inv_description}</p>`
+    grid += `<img src="${data.inv_image}" alt="${data.inv_year} ${data.inv_make} ${data.inv_model}">`
+    grid += `<img src="${data.inv_thumbnail}" alt="Thumbnail">`
+    grid += `<p>${data.inv_price}</p>`
+    grid += `<p>${data.inv_miles}<p>`
+    grid += `<p>${data.inv_color}<p>`
+    grid += `</div>`
+  } else {
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return grid
+}
 
 /* ****************************************
  * Middleware For Handling Errors
