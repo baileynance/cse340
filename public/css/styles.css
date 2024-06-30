@@ -24,6 +24,11 @@ p, a, li {
   font-family: "Fira Sans", sans-serif;
 }
 
+.nav a {
+  color: white;
+  text-decoration: none;
+}
+
 /* Body */
 
 @media screen and (min-width: 500px) {
