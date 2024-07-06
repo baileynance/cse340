@@ -14,7 +14,7 @@
  </ul>
 <% } %>
 
-<form id="inventory-form" action="" method="post">
+<form id="inventory-form" action="/management/add-inventory" method="post">
   <label for="inv_make">Make:</label>
   <input type="text" name="inv_make" class="inv-make" value="<%= locals.inv_make %>" required>
   <label for="inv_model">Model:</label>
@@ -29,4 +29,6 @@
   <input type="text" name="inv_miles" value="<%= locals.inv_miles %>" class="inv-miles" required>
   <label for="inv_color">Color:</label>
   <input type="text" name="inv_color" value="<%= locals.inv_color %>" class="inv-color" required>
+  <%- select %>
+  <input type="submit" name="submit" value="Submit" class="submit">
 </form>

@@ -364,6 +364,103 @@ h1 {
   border-right: 5px solid green;
 }
 
+/* Classification Form */
+
+#classification-form {
+  background-color: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  width: 50%;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+#classification-form input {
+  border-radius: 5px;
+}
+
+#classification-form input[type="text"] {
+  display: block;
+  width: 90%;
+  height: 30px;
+  margin: 0.5rem auto 1rem auto;
+}
+
+#classification-form label {
+  margin: 0.5rem auto;
+  color: var(--white);
+  font-size: 20px;
+  margin-left: 5%;
+}
+
+#classification-form input[type="submit"] {
+  border-radius: 33px;
+  height: 44px;
+  margin-left: 5%;
+  padding: 10px;
+  margin-top: 0.5rem;
+}
+
+#classification-form input:required:invalid {
+  border-right: 5px solid red;
+}
+
+#classification-form input:required:valid {
+  border-right: 5px solid green;
+}
+
+/* Inventory Form */
+
+#inventory-form {
+  background-color: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  width: 50%;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+#inventory-form input {
+  border-radius: 5px;
+}
+
+#inventory-form input[type="text"] {
+  display: block;
+  width: 90%;
+  height: 30px;
+  margin: 0.5rem auto 1rem auto;
+}
+
+#inventory-form select {
+  display: block;
+  width: 90%;
+  height: 30px;
+  margin: 2rem auto 1rem auto;
+}
+
+#inventory-form label {
+  margin: 0.5rem auto;
+  color: var(--white);
+  font-size: 20px;
+  margin-left: 5%;
+}
+
+#inventory-form input[type="submit"] {
+  border-radius: 33px;
+  height: 44px;
+  margin-left: 5%;
+  padding: 10px;
+  margin-top: 0.5rem;
+}
+
+#inventory-form input:required:invalid {
+  border-right: 5px solid red;
+}
+
+#inventory-form input:required:valid {
+  border-right: 5px solid green;
+}
+
 /* Footer */
 
 footer p {
