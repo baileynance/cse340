@@ -1,9 +1,16 @@
+const utilities = require("../utilities/")
+
 const errorCont = {}
 
 errorCont.buildErrorMessage = async function (req, res, next) {
-    res.render("./errors/error", {
-        title: "500 Server Error",
-        message: "Try Again Please"
+    let nav = await utilities.getNav()
+    req.flash(
+        "notice",
+        `Sorry, please try again`
+      )
+      res.status(500).render("errors/error", {
+        title: "error",
+        nav,
     })
 }
 
