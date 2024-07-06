@@ -1,0 +1,17 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<form id="register-form">
+    <label for="account_firstname">First Name:</label>
+    <input type="text" name="account_firstname" class="account-firstname">
+    <label for="account_lastname">Last Name:</label>
+    <input type="text" name="account_lastname" class="account-lastname">
+    <label for="account_email">Email:</label>
+    <input type="text" name="account_email" class="account-email">
+    <label for="account_password">Password:</label>
+    <input type="text" name="account_password" class="account-password">
+    <input type="submit" name="register" value="Register" id="account-register">
+</form>
