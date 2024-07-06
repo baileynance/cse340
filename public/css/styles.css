@@ -287,7 +287,7 @@ h1 {
   padding: 1rem;
 }
 
-#account-form input[type="text"] {
+#account-form input[type="email"], #account-form input[type="password"] {
   display: block;
   width: 90%;
   height: 30px;
@@ -326,7 +326,11 @@ h1 {
   padding: 1rem;
 }
 
-#register-form input[type="text"] {
+#register-form input {
+  border-radius: 5px;
+}
+
+#register-form input[type="text"], #register-form input[type="email"], #register-form input[type="password"] {
   display: block;
   width: 90%;
   height: 30px;
@@ -340,12 +344,24 @@ h1 {
   margin-left: 5%;
 }
 
+#password-requirements {
+  color: white;
+}
+
 #account-register {
   border-radius: 33px;
   height: 44px;
   margin-left: 5%;
   padding: 10px;
   margin-top: 0.5rem;
+}
+
+#register-form input:required:invalid {
+  border-right: 5px solid red;
+}
+
+#register-form input:required:valid {
+  border-right: 5px solid green;
 }
 
 /* Footer */
