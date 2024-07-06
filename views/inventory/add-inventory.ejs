@@ -1,0 +1,32 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<form id="inventory-form" action="" method="post">
+  <label for="inv_make">Make:</label>
+  <input type="text" name="inv_make" class="inv-make" value="<%= locals.inv_make %>" required>
+  <label for="inv_model">Model:</label>
+  <input type="text" name="inv_model" class="inv-model" value="<%= locals.inv_model %>" required>
+  <label for="inv_year">Year:</label>
+  <input type="text" name="inv_year" value="<%= locals.inv_year %>" class="inv-year" required>
+  <label for="inv_description">Description</label>
+  <input type="text" name="inv_description" value="<%= locals.inv_description %>" class="inv-description" required>
+  <label for="inv_price">Price:</label>
+  <input type="text" name="inv_price" value="<%= locals.inv_price %>" class="inv-price" required>
+  <label for="inv_miles">Miles:</label>
+  <input type="text" name="inv_miles" value="<%= locals.inv_miles %>" class="inv-miles" required>
+  <label for="inv_color">Color:</label>
+  <input type="text" name="inv_color" value="<%= locals.inv_color %>" class="inv-color" required>
+</form>
