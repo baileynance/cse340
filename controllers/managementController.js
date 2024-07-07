@@ -73,10 +73,11 @@ managementCont.addClassification = async function (req, res) {
 }
 
 /* ****************************************
-*  Process Adding Classification
+*  Process Adding Inventory
 * *************************************** */
 managementCont.addInventory = async function (req, res) {
     let nav = await utilities.getNav()
+    let select = await utilities.buildClassificationList();
     const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id } = req.body
   
     const regResult = await managementModel.submitInventory(
@@ -98,6 +99,7 @@ managementCont.addInventory = async function (req, res) {
       res.status(201).render("inventory/add-inventory", {
         title: "Add Inventory",
         nav,
+        select,
         errors: null
       })
     } else {
@@ -105,6 +107,7 @@ managementCont.addInventory = async function (req, res) {
       res.status(501).render("inventory/add-inventory", {
         title: "Add Inventory",
         nav,
+        select,
         errors: null
       })
     }
