@@ -8,25 +8,21 @@ const validate = {}
   * ********************************* */
 validate.loginRules = () => {
   return [
-    // valid email is required and cannot already exist in the DB
+    // needs to enter a valid email
     body("account_email")
-    .withMessage("A valid email is required.")
-    .custom(async (account_email) => {
-      const emailExists = await accountModel.checkExistingEmail(account_email)
-      if (!emailExists){
-        throw new Error("Email does not exist. Please log in using a different email")
-      }
-    }),
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 1 })
+    .withMessage("Please enter a valid email."),
 
-    // password is required and must be strong password
+    // password must not be empty
     body("account_password")
-      .withMessage("Please enter a valid password.")
-      .custom(async (account_password) => {
-        const passwordMatch = await accountModel.checkMatchingPassword(account_password)
-        if (!passwordMatch){
-          throw new Error("Password does not match. Please try again")
-        }
-      }),
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 1 })
+    .withMessage("Please enter your password."),
   ]
 }
 
@@ -101,6 +97,26 @@ validate.checkRegData = async (req, res, next) => {
       return
     }
     next()
+}
+
+/* ******************************
+ * Check data and return errors or continue to registration
+ * ***************************** */
+validate.checkLoginData = async (req, res, next) => {
+  const { account_email } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/login", {
+      errors,
+      title: "Login",
+      nav,
+      account_email
+    })
+    return
+  }
+  next()
 }
   
 module.exports = validate

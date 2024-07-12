@@ -17,8 +17,21 @@ async function registerAccount(account_firstname, account_lastname, account_emai
 * *************************** */
 async function getAccount(account_email, account_password){
   try {
-    const sql = `SELECT * FROM account WHERE account_email = ${account_email} AND account_password = ${account_password}`
+    const sql = `SELECT * FROM account WHERE account_email = $1 AND account_password = $2`
     return await pool.query(sql, [account_email, account_password])
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* *****************************
+*   Get account by email
+* *************************** */
+async function getAccountByEmail(account_email){
+  try {
+    const sql = `SELECT * FROM account WHERE account_email = $1`
+    const account = await pool.query(sql, [account_email])
+    return account.rows[0]
   } catch (error) {
     return error.message
   }
@@ -50,4 +63,4 @@ async function checkMatchingPassword(account_email, account_password){
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, checkMatchingPassword, getAccount }
+module.exports = { registerAccount, checkExistingEmail, checkMatchingPassword, getAccount, getAccountByEmail }
