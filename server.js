@@ -18,7 +18,6 @@ const errorRoute = require("./routes/errorRoute")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
-const managementRoute = require("./routes/managementRoute")
 const cookieParser = require("cookie-parser")
 
 /* ***********************
@@ -66,8 +65,6 @@ app.use("/inv", utilities.handleErrors(inventoryRoute))
 app.use("/account", utilities.handleErrors(accountRoute))
 // Error Route
 app.use("/error", utilities.handleErrors(errorRoute))
-// Management Route
-app.use("/management", utilities.handleErrors(managementRoute))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})

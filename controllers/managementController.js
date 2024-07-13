@@ -8,9 +8,11 @@ const managementCont = {}
  * ************************** */
 managementCont.buildManagement = async function (req, res, next) {
     let nav = await utilities.getNav()
+    const select = await utilities.buildClassificationList()
     res.render("./inventory/management", {
         title: "Manage",
         nav,
+        select,
         errors: null
     })
 }
