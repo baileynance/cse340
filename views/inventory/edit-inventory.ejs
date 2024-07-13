@@ -14,7 +14,7 @@
  </ul>
 <% } %>
 
-<form id="inventory-form" action="/inv/add-inventory" method="post">
+<form id="edit-inventory-form" action="/inv/update" method="post">
   <label for="inv_make">Make:</label>
   <input type="text" name="inv_make" class="inv-make" value="<%= locals.inv_make %>" required>
   <label for="inv_model">Model:</label>
@@ -22,7 +22,7 @@
   <label for="inv_year">Year:</label>
   <input type="text" name="inv_year" value="<%= locals.inv_year %>" class="inv-year" required>
   <label for="inv_description">Description</label>
-  <input type="text" name="inv_description" value="<%= locals.inv_description %>" class="inv-description" required>
+  <textarea name="inv_description" class="inv-description" required><%= locals.inv_description %></textarea>
   <label for="inv_price">Price:</label>
   <input type="text" name="inv_price" value="<%= locals.inv_price %>" class="inv-price" required>
   <label for="inv_miles">Miles:</label>
@@ -30,5 +30,5 @@
   <label for="inv_color">Color:</label>
   <input type="text" name="inv_color" value="<%= locals.inv_color %>" class="inv-color" required>
   <%- select %>
-  <input type="submit" name="submit" value="Submit" class="submit">
+  <input type="submit" name="submit" value="Update Vehicle" class="submit">
 </form>
