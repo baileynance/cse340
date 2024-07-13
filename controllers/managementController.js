@@ -119,7 +119,7 @@ managementCont.addInventory = async function (req, res) {
 /* ***************************
  *  Build edit inventory view
  * ************************** */
-managementCont.editInventory = async function (req, res, next) {
+managementCont.editInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inventory_id)
   console.log(inv_id)
   let nav = await utilities.getNav()
@@ -202,6 +202,64 @@ managementCont.updateInventory = async function (req, res, next) {
     inv_miles,
     inv_color,
     classification_id
+    })
+  }
+}
+
+/* ***************************
+ *  Build Delete Inventory Data View
+ * ************************** */
+managementCont.deleteInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inventory_id)
+  console.log(inv_id)
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getInventoryByInventoryId(inv_id)
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price,
+  })
+}
+
+/* ***************************
+ *  Delete Inventory Data 
+ * ************************** */
+managementCont.deleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_price,
+    inv_year,
+  } = req.body
+  const deleteResult = await managementModel.deleteInventoryItem(
+    inv_id
+  )
+  console.log(updateResult)
+
+  if (deleteResult) {
+    const itemName = deleteResult.inv_make + " " + deleteResult.inv_model
+    req.flash("notice", `The ${itemName} was successfully deleted.`)
+    res.redirect("/inv/")
+  } else {
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the delete failed.")
+    res.status(501).render("inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_price,
     })
   }
 }

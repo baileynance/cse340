@@ -33,12 +33,21 @@ router.post("/add-inventory",
 )
 // Route to get inventory by classification id
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
 // Route to edit inventory by inventory id
-router.get("/edit/:inventory_id", utilities.handleErrors(managementController.editInventory))
+router.get("/edit/:inventory_id", utilities.handleErrors(managementController.editInventoryView))
 router.post("/update", 
     regValidate.inventoryRules(), 
     regValidate.checkUpdateData,
     utilities.handleErrors(managementController.updateInventory)
+)
+
+// Route to delete inventory by inventory id
+router.get("/delete/:inventory_id", utilities.handleErrors(managementController.deleteInventoryView))
+router.post("/confirm-delete/:inventory_id", 
+    regValidate.inventoryRules(), 
+    regValidate.checkUpdateData,
+    utilities.handleErrors(managementController.deleteInventory)
 )
 
 module.exports = router;
