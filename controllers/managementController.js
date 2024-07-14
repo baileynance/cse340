@@ -242,10 +242,11 @@ managementCont.deleteInventory = async function (req, res, next) {
   const deleteResult = await managementModel.deleteInventoryItem(
     inv_id
   )
-  console.log(updateResult)
+  console.log(inv_id)
+  console.log(deleteResult)
 
   if (deleteResult) {
-    const itemName = deleteResult.inv_make + " " + deleteResult.inv_model
+    const itemName = inv_make + " " + inv_model
     req.flash("notice", `The ${itemName} was successfully deleted.`)
     res.redirect("/inv/")
   } else {

@@ -154,5 +154,65 @@ validate.checkUpdateData = async (req, res, next) => {
   }
   next()
 }
-  
+
+/* ******************************
+ * Check data and return errors or continue edit inventory
+ * ***************************** */
+validate.checkDeleteData = async (req, res, next) => {
+  const { inv_make, inv_model, inv_year, inv_price, inv_id } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("inventory/delete-confirm", {
+      errors,
+      title: "Delete" + " " + inv_make + " " + inv_model,
+      nav,
+      inv_make, 
+      inv_model, 
+      inv_year, 
+      inv_price, 
+      inv_id
+    })
+    return
+  }
+  next()
+}
+ 
+/*  **********************************
+  * Inventory Data Validation Rules
+  * ********************************* */
+validate.deleteRules = () => {
+  return [
+    // Inventory make is required and must be string
+    body("inv_make")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide an inventory make."), // on error this message is sent.
+    // Inventory mode is required and must be string
+    body("inv_model")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 1 })
+    .withMessage("Please provide an inventory model."), // on error this message is sent.
+    // Inventory year is required and must be string
+    body("inv_year")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 4, max: 4 })
+      .withMessage("Please provide a valid inventory year."), // on error this message is sent.
+    // Inventory price is required and must be string
+    body("inv_price")
+    .trim()
+    .escape()
+    .notEmpty()
+    .isLength({ min: 1 })
+    .withMessage("Please provide an inventory price."), // on error this message is sent.
+  ]
+}
+
 module.exports = validate

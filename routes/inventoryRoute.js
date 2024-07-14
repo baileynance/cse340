@@ -42,11 +42,12 @@ router.post("/update",
     utilities.handleErrors(managementController.updateInventory)
 )
 
-// Route to delete inventory by inventory id
+// Route to delete inventory view
 router.get("/delete/:inventory_id", utilities.handleErrors(managementController.deleteInventoryView))
-router.post("/confirm-delete/:inventory_id", 
-    regValidate.inventoryRules(), 
-    regValidate.checkUpdateData,
+// Route to delete inventory by inventory id
+router.post("/delete", 
+    regValidate.deleteRules(), 
+    regValidate.checkDeleteData,
     utilities.handleErrors(managementController.deleteInventory)
 )
 
