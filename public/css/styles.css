@@ -673,10 +673,6 @@ h1 {
   margin: 3rem 2rem 0rem 2rem;
 }
 
-.accountPassword {
-  appearance: "-webkit-text-security: square";
-}
-
 /* Account Manage */
 
 .account-display {
