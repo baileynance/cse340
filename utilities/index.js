@@ -162,4 +162,27 @@ Util.checkLogin = (req, res, next) => {
   }
 }
 
+Util.checkLoggedIn = (req, res, next) => {
+  if (req.cookies.jwt) {
+    res.locals.header =
+    `<span class="siteName">
+    <a class="title" href="/" title="Return to home page">CSE Motors</a>
+    </span>
+    <div id="tools">
+      <a class="myaccount" title="Click for Account Details" href="/account/maintenance">Welcome Basic</a>
+      <a class="myaccount" title="Click to logout" href="/account/logout">Logout</a>
+    </div>`
+    next()
+  } else {
+    res.locals.header =
+    `<span class="siteName">
+    <a class="title" href="/" title="Return to home page">CSE Motors</a>
+    </span>
+    <div id="tools">
+      <a class="myaccount" title="Click to log in" href="/account/login">My Account</a>
+    </div>`
+    next()
+  }
+}
+
 module.exports = Util
