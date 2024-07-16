@@ -200,16 +200,20 @@ Util.checkLoggedIn = (req, res, next) => {
 Util.checkUserDisplay = (req, res, next) => {
   if (req.cookies.type) {
     res.locals.account_management =
-    `<h2>Welcome, <span>${req.cookies.name}</span></h2>
-    <a class="account" title="Click for Account Management" href="/account/update/${req.cookies.id}">Edit Account Information</a>`
+    `<div class="account-display">
+    <h2>Welcome, <span>${req.cookies.name}</span></h2>
+    <a class="account" title="Click for Account Management" href="/account/update/${req.cookies.id}">Edit Account Information</a>
+    <div>`
     next()
   } 
   else {
     res.locals.account_management =
-    `<h2>Welcome, <span>${req.cookies.name}</span></h2>
+    `<div class="account-display">
+    <h2>Welcome, <span>${req.cookies.name}</span></h2>
     <a class="account" title="Click for Account Management" href="/account/update/${req.cookies.id}">Edit Account Information</a>
     <h3>Inventory Management:</h3>
-    <p><a href="/inv/">Management<a></p>`
+    <p><a href="/inv/">Management<a></p>
+    <div>`
     next()
   }
 }

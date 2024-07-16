@@ -677,6 +677,12 @@ h1 {
   appearance: "-webkit-text-security: square";
 }
 
+/* Account Manage */
+
+.account-display {
+  margin: 1rem;
+}
+
 /* Footer */
 
 footer p {
