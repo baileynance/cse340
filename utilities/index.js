@@ -142,7 +142,12 @@ Util.checkAuthorized = (req, res, next) => {
       req.flash("notice", "Please log in")
       return res.redirect("/account/login")
      } else {
-      next()
+      if (req.cookies.type == "Client") {
+        req.flash("notice", "Sorry you do not have access")
+        return res.redirect("/account/login")
+      } else {
+        next()
+      }
      }
     })
   } else {
@@ -173,7 +178,7 @@ Util.checkLoggedIn = (req, res, next) => {
     <a class="title" href="/" title="Return to home page">CSE Motors</a>
     </span>
     <div id="tools">
-      <a class="myaccount" title="Click for Account Details" href="/account/maintenance">Welcome Basic</a>
+      <a class="myaccount" title="Click for Account Details" href="/account/">Welcome</a>
       <a class="myaccount" title="Click to logout" href="/account/logout">Logout</a>
     </div>`
     next()
@@ -185,6 +190,24 @@ Util.checkLoggedIn = (req, res, next) => {
     <div id="tools">
       <a class="myaccount" title="Click to log in" href="/account/login">My Account</a>
     </div>`
+    next()
+  }
+}
+
+/* ****************************************
+ *  Check User Display
+ * ************************************ */
+Util.checkUserDisplay = (req, res, next) => {
+  if (req.cookies.type) {
+    res.locals.account_management =
+    `<h2>Welcome, <span>${locals.account_firstname}</span></h2>`
+    next()
+  } 
+  else {
+    res.locals.account_management =
+    `<h2>Welcome, <span>${locals.account_firstname}</span></h2>
+    <h3>Inventory Management:</h3>
+    <p><a href="/inv/">Management<a></p>`
     next()
   }
 }

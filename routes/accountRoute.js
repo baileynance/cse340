@@ -10,7 +10,10 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // Build Registration
 router.get("/registration", utilities.handleErrors(accountController.buildRegister));
 // Default view
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
+router.get("/", 
+    utilities.checkLogin, 
+    utilities.checkUserDisplay, 
+    utilities.handleErrors(accountController.buildAccountManagement));
 // Process the registration data
 router.post("/registration", regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount))
 // Process the login request
