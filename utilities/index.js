@@ -141,8 +141,9 @@ Util.checkAuthorized = (req, res, next) => {
      if (err) {
       req.flash("notice", "Please log in")
       return res.redirect("/account/login")
+     } else {
+      next()
      }
-     next()
     })
   } else {
     req.flash("notice", "Please log in")
@@ -162,6 +163,9 @@ Util.checkLogin = (req, res, next) => {
   }
 }
 
+/* ****************************************
+ *  Check if Logged In
+ * ************************************ */
 Util.checkLoggedIn = (req, res, next) => {
   if (req.cookies.jwt) {
     res.locals.header =
