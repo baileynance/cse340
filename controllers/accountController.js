@@ -176,4 +176,94 @@ async function updateAccountView(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, logoutAccount, updateAccountView }
+/* ****************************************
+*  Update Account Info
+* *************************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  } = req.body
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+  // console.log(updateResult)
+
+  if (updateResult) {
+    req.flash("notice", `Your account was successfully updated.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the update has failed.")
+    res.status(501).render(`account/update`, {
+    title: "Edit Account",
+    nav,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+    errors: null
+    })
+  }
+}
+
+/* ****************************************
+*  Update Account Password
+* *************************************** */
+async function updatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+    account_password
+  } = req.body
+
+  // Hash the password before storing
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the password change.')
+    res.status(500).render("account/update", {
+      title: "Edit Account",
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id,
+      errors: null,
+    })
+  }
+  
+  const updateResult = await accountModel.updatePassword(
+    hashedPassword,
+    account_id
+  )
+  // console.log(updateResult)
+
+  if (updateResult) {
+    req.flash("notice", `Your password was successfully updated.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the update has failed.")
+    res.status(501).render("account/update", {
+    title: "Edit Account",
+    nav,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+    errors: null
+    })
+  }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, logoutAccount, updateAccountView, updateAccount, updatePassword }
