@@ -37,6 +37,20 @@ async function getAccountByEmail(account_email){
   }
 }
 
+/* *****************************
+*   Get account by id
+* *************************** */
+async function getAccountById(account_id){
+  try {
+    const sql = `SELECT * FROM account WHERE account_id = $1`
+    const account = await pool.query(sql, [account_id])
+    return account.rows[0]
+  } catch (error) {
+    return error.message
+  }
+}
+
+
 /* **********************
  *   Check for existing email
  * ********************* */
@@ -63,4 +77,4 @@ async function checkMatchingPassword(account_email, account_password){
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, checkMatchingPassword, getAccount, getAccountByEmail }
+module.exports = { registerAccount, checkExistingEmail, checkMatchingPassword, getAccount, getAccountByEmail, getAccountById }

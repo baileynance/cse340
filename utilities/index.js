@@ -201,13 +201,13 @@ Util.checkUserDisplay = (req, res, next) => {
   if (req.cookies.type) {
     res.locals.account_management =
     `<h2>Welcome, <span>${req.cookies.name}</span></h2>
-    <a class="account" title="Click for Account Management" href="/update/${req.cookies.id}">Edit Account Information</a>`
+    <a class="account" title="Click for Account Management" href="/account/update/${req.cookies.id}">Edit Account Information</a>`
     next()
   } 
   else {
     res.locals.account_management =
     `<h2>Welcome, <span>${req.cookies.name}</span></h2>
-    <a class="account" title="Click for Account Management" href="/update/${req.cookies.id}">Edit Account Information</a>
+    <a class="account" title="Click for Account Management" href="/account/update/${req.cookies.id}">Edit Account Information</a>
     <h3>Inventory Management:</h3>
     <p><a href="/inv/">Management<a></p>`
     next()

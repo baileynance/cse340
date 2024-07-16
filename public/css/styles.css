@@ -563,6 +563,110 @@ h1 {
   margin: 5%;
 }
 
+/* Update Account Form */
+
+#update-account-form {
+  background-color: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  width: 50%;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+#update-account-form input {
+  border-radius: 5px;
+}
+
+#update-account-form input[type="text"] {
+  display: block;
+  width: 90%;
+  height: 30px;
+  margin: 0.5rem auto 1rem auto;
+}
+
+#update-account-form label {
+  margin: 0.5rem auto;
+  color: var(--white);
+  font-size: 20px;
+  margin-left: 5%;
+}
+
+#update-account-form input[type="submit"] {
+  border-radius: 33px;
+  height: 44px;
+  margin-left: 5%;
+  padding: 10px;
+  margin-top: 0.5rem;
+}
+
+#update-account-form p {
+  color: var(--white);
+  margin: 5%;
+}
+
+#update-account-form input:required:invalid {
+  border-right: 5px solid red;
+}
+
+#update-account-form input:required:valid {
+  border-right: 5px solid green;
+}
+
+/* Update Password Form */
+
+#update-password-form {
+  background-color: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  width: 50%;
+  margin: 2rem;
+  padding: 1rem;
+}
+
+#update-password-form input {
+  border-radius: 5px;
+}
+
+#update-password-form input[type="text"] {
+  display: block;
+  width: 90%;
+  height: 30px;
+  margin: 0.5rem auto 1rem auto;
+}
+
+#update-password-form label {
+  margin: 0.5rem auto;
+  color: var(--white);
+  font-size: 20px;
+  margin-left: 5%;
+}
+
+#update-password-form input[type="submit"] {
+  border-radius: 33px;
+  height: 44px;
+  margin-left: 5%;
+  padding: 10px;
+  margin-top: 0.5rem;
+}
+
+#update-password-form p {
+  color: var(--white);
+  margin: 5%;
+}
+
+#update-password-form input:required:invalid {
+  border-right: 5px solid red;
+}
+
+#update-password-form input:required:valid {
+  border-right: 5px solid green;
+}
+
+#password-change {
+  margin: 3rem 2rem 0rem 2rem;
+}
+
 /* Footer */
 
 footer p {
@@ -676,6 +780,20 @@ footer p {
   /* Delete Form */
 
   #delete-form {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Update Form */
+
+  #update-account-form {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Update Form */
+
+  #update-password-form {
     width: 90%;
     margin: 0 auto;
   }
