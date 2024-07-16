@@ -100,10 +100,12 @@ async function accountLogin(req, res) {
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
    if(process.env.NODE_ENV === 'development') {
      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-     res.cookie("type", accountData.account_type)
+     res.cookie("type", accountData.account_type, { httpOnly: true, maxAge: 3600 * 1000 })
+     res.cookie("name", accountData.account_firstname, { httpOnly: true, maxAge: 3600 * 1000 })
      } else {
        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
-       res.cookie("type", accountData.account_type)
+       res.cookie("type", accountData.account_type, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+       res.cookie("name", accountData.account_firstname, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
      }
    return res.redirect("/account/")
    } 

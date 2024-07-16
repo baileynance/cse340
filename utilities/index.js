@@ -200,12 +200,12 @@ Util.checkLoggedIn = (req, res, next) => {
 Util.checkUserDisplay = (req, res, next) => {
   if (req.cookies.type) {
     res.locals.account_management =
-    `<h2>Welcome, <span>${locals.account_firstname}</span></h2>`
+    `<h2>Welcome, <span>${req.cookies.name}</span></h2>`
     next()
   } 
   else {
     res.locals.account_management =
-    `<h2>Welcome, <span>${locals.account_firstname}</span></h2>
+    `<h2>Welcome, <span>${req.cookies.name}</span></h2>
     <h3>Inventory Management:</h3>
     <p><a href="/inv/">Management<a></p>`
     next()
