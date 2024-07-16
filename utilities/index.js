@@ -178,7 +178,7 @@ Util.checkLoggedIn = (req, res, next) => {
     <a class="title" href="/" title="Return to home page">CSE Motors</a>
     </span>
     <div id="tools">
-      <a class="myaccount" title="Click for Account Details" href="/account/">Welcome</a>
+      <a class="myaccount" title="Click for Account Details" href="/account/">Welcome ${req.cookies.name}</a>
       <a class="myaccount" title="Click to logout" href="/account/logout">Logout</a>
     </div>`
     next()
@@ -200,12 +200,14 @@ Util.checkLoggedIn = (req, res, next) => {
 Util.checkUserDisplay = (req, res, next) => {
   if (req.cookies.type) {
     res.locals.account_management =
-    `<h2>Welcome, <span>${req.cookies.name}</span></h2>`
+    `<h2>Welcome, <span>${req.cookies.name}</span></h2>
+    <a class="account" title="Click for Account Management" href="/update/${req.cookies.id}">Edit Account Information</a>`
     next()
   } 
   else {
     res.locals.account_management =
     `<h2>Welcome, <span>${req.cookies.name}</span></h2>
+    <a class="account" title="Click for Account Management" href="/update/${req.cookies.id}">Edit Account Information</a>
     <h3>Inventory Management:</h3>
     <p><a href="/inv/">Management<a></p>`
     next()

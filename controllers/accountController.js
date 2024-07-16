@@ -102,10 +102,11 @@ async function accountLogin(req, res) {
      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
      res.cookie("type", accountData.account_type, { httpOnly: true, maxAge: 3600 * 1000 })
      res.cookie("name", accountData.account_firstname, { httpOnly: true, maxAge: 3600 * 1000 })
+     res.cookie("id", accountData.account_id, { httpOnly: true, maxAge: 3600 * 1000 })
      } else {
        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
        res.cookie("type", accountData.account_type, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
-       res.cookie("name", accountData.account_firstname, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+       res.cookie("id", accountData.account_id, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
      }
    return res.redirect("/account/")
    } 
@@ -142,12 +143,13 @@ async function accountLogin(req, res) {
 }
 
 /* ****************************************
- *  Build acount management view
+ *  Logout account
  * ************************************ */
 async function logoutAccount(req, res) {
   res.clearCookie('jwt'); 
   res.clearCookie('type'); 
   res.clearCookie('name'); 
+  res.clearCookie('id'); 
   let nav = await utilities.getNav()
   req.flash(
     "notice",
