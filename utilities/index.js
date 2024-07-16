@@ -130,6 +130,27 @@ Util.checkJWTToken = (req, res, next) => {
  }
 
 /* ****************************************
+* Middleware to check authorization
+**************************************** */
+Util.checkAuthorized = (req, res, next) => {
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("notice", "Please log in")
+      return res.redirect("/account/login")
+     }
+     next()
+    })
+  } else {
+    req.flash("notice", "Please log in")
+    return res.redirect("/account/login")
+  }
+ }
+
+/* ****************************************
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {

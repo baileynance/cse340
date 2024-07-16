@@ -18,36 +18,39 @@ router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvento
 // Management
 //
 // Route to build inventory by classification view
-router.get("/", utilities.handleErrors(managementController.buildManagement));
+router.get("/", utilities.checkAuthorized, utilities.handleErrors(managementController.buildManagement));
 // Route to build add-classification view
-router.get("/add-classification", utilities.handleErrors(managementController.buildAddClassification));
+router.get("/add-classification", utilities.checkAuthorized, utilities.handleErrors(managementController.buildAddClassification));
 // Route to build add-inventory view
-router.get("/add-inventory", utilities.handleErrors(managementController.buildAddInventory));
+router.get("/add-inventory", utilities.checkAuthorized, utilities.handleErrors(managementController.buildAddInventory));
 // Process the adding classifcation data
-router.post("/add-classification", regValidate.classificationRules(), regValidate.checkClassData, utilities.handleErrors(managementController.addClassification))
+router.post("/add-classification", regValidate.classificationRules(), regValidate.checkClassData, utilities.checkAuthorized, utilities.handleErrors(managementController.addClassification))
 // Process the adding inventory data
 router.post("/add-inventory", 
     regValidate.inventoryRules(), 
     regValidate.checkInventoryData, 
+    utilities.checkAuthorized,
     utilities.handleErrors(managementController.addInventory)
 )
 // Route to get inventory by classification id
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id", utilities.checkAuthorized, utilities.handleErrors(invController.getInventoryJSON))
 
 // Route to edit inventory by inventory id
-router.get("/edit/:inventory_id", utilities.handleErrors(managementController.editInventoryView))
+router.get("/edit/:inventory_id", utilities.checkAuthorized, utilities.handleErrors(managementController.editInventoryView))
 router.post("/update", 
     regValidate.inventoryRules(), 
     regValidate.checkUpdateData,
+    utilities.checkAuthorized,
     utilities.handleErrors(managementController.updateInventory)
 )
 
 // Route to delete inventory view
-router.get("/delete/:inventory_id", utilities.handleErrors(managementController.deleteInventoryView))
+router.get("/delete/:inventory_id", utilities.checkAuthorized, utilities.handleErrors(managementController.deleteInventoryView))
 // Route to delete inventory by inventory id
 router.post("/delete", 
     regValidate.deleteRules(), 
     regValidate.checkDeleteData,
+    utilities.checkAuthorized,
     utilities.handleErrors(managementController.deleteInventory)
 )
 
