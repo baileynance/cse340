@@ -125,6 +125,9 @@ async function accountLogin(req, res) {
   }
  }
 
+ /* ****************************************
+ *  Build acount management view
+ * ************************************ */
  async function buildAccountManagement(req, res) {
   let nav = await utilities.getNav()
   req.flash(
@@ -138,4 +141,19 @@ async function accountLogin(req, res) {
   }) 
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
+/* ****************************************
+ *  Build acount management view
+ * ************************************ */
+async function logoutAccount(req, res) {
+  res.clearCookie('jwt'); 
+  res.clearCookie('type'); 
+  res.clearCookie('name'); 
+  let nav = await utilities.getNav()
+  req.flash(
+    "notice",
+    `You're logged out.`
+  )
+  return res.redirect("/")
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, logoutAccount }
