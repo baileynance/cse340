@@ -54,4 +54,12 @@ router.post("/delete",
     utilities.handleErrors(managementController.deleteInventory)
 )
 
+// Route to notification signup route
+// router.get("/notify:inventory_id", utilities.handleErrors(managementController.notifyInventoryView))
+// router.post("/notify", 
+//     regValidate.notifyRules(), 
+//     regValidate.checkNotifyData,
+//     utilities.handleErrors(managementController.notifyInventory)
+// )
+
 module.exports = router;

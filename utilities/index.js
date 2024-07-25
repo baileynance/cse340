@@ -73,6 +73,7 @@ Util.buildInventoryGrid = async function(data){
     grid +=     `<p>Miles: ${data.inv_miles}<p>`
     grid +=     `<p>Color: ${data.inv_color}<p>`
     grid +=   `</div>`
+    // grid += `<a href="/notify/${data.inv_id}">Sign-Up to Get Notified</a>`
     grid += `</div>`
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
